@@ -1,0 +1,8 @@
+com\auction\cataloguemicroservice\CatalogueMicroserviceApplication.class
+com\auction\cataloguemicroservice\Item$ItemStatus.class
+com\auction\cataloguemicroservice\ItemService.class
+com\auction\cataloguemicroservice\Category.class
+com\auction\cataloguemicroservice\ItemController.class
+com\auction\cataloguemicroservice\Item.class
+com\auction\cataloguemicroservice\ItemRepository.class
+com\auction\cataloguemicroservice\Item$AuctionType.class
