@@ -27,7 +27,7 @@ public class UserService implements UserDetailsService {
                 .orElseThrow(() -> new UsernameNotFoundException("User not found with username: " + username));
     }
 
-    void addUser(User user) {
+    public void addUser(User user) {
         Optional<User> existingUser = userRepository.findByUsername(user.getUsername());
         if (existingUser.isPresent()) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Username already taken");
@@ -42,16 +42,16 @@ public class UserService implements UserDetailsService {
         userRepository.save(user);
     }
 
-    List<User> getUsers() {
+    public List<User> getUsers() {
         return userRepository.findAll();
     }
 
-    User getUser(Long id) {
+    public User getUser(Long id) {
         User user = userRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Invalid id " + id));
         return user;
     }
 
-    void updateUser(Long id, User user) {
+    public void updateUser(Long id, User user) {
 
         userRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Invalid ID " + id));
 
@@ -60,7 +60,7 @@ public class UserService implements UserDetailsService {
         userRepository.save(user);
     }
 
-    void deleteUser(Long id) {
+    public void deleteUser(Long id) {
 
         // check if id exist
         User user = userRepository.findById(id).orElseThrow(() ->
@@ -69,7 +69,7 @@ public class UserService implements UserDetailsService {
         userRepository.delete(user);
     }
 
-    void deleteUser(String userName) {
+    public void deleteUser(String userName) {
 
         User user = userRepository.findByUsername(userName)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Invalid username: " + userName));
@@ -79,7 +79,8 @@ public class UserService implements UserDetailsService {
     }
 
 
-   void updateuserName(Long id, AuthRequest userDTO) {
+
+   public void updateuserName(Long id, AuthRequest userDTO) {
         User user = userRepository.findById(id).orElseThrow(() ->
                 new ResponseStatusException(HttpStatus.NOT_FOUND, "Invalid ID " + id));
 
@@ -87,7 +88,7 @@ public class UserService implements UserDetailsService {
         userRepository.save(user);
     }
 
-    boolean authenticateUser(String userName, String password) {
+    public boolean authenticateUser(String userName, String password) {
         // Attempt to find the user by their username
         Optional<User> userOptional = userRepository.findByUsername(userName);
 
@@ -103,7 +104,7 @@ public class UserService implements UserDetailsService {
     }
 
 
-    void resetPassword(String userName, PasswordResetDTO newPassword)
+    public void resetPassword(String userName, PasswordResetDTO newPassword)
     {
 
         User user = userRepository.findByUsername(userName).orElseThrow(() ->
