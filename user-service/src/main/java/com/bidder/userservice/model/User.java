@@ -19,6 +19,10 @@ import jakarta.persistence.Id;
 @Entity
 public class User implements UserDetails {
 
+	public User() {
+
+	}
+
 	public enum Role {
 		USER, ADMIN;
 
@@ -41,21 +45,48 @@ public class User implements UserDetails {
 	private String password;
 
 	@Column(nullable = false)
-	private String name;
+	private String firstName;
+
+
+	@Column(nullable = false)
+	private String lastName;
+	@Column(nullable = false)
+	private String address;
+
+	@Column(nullable = false)
+	private Integer streetNumber;
+
+	@Column(nullable = false)
+	private String postalCode;
+
+	@Column(nullable = false)
+	private String city;
+
+	@Column(nullable = false)
+	private String country;
+
 
 	@Column(nullable = false)
 	@Enumerated(EnumType.STRING)
 	private Role role;
 
-	public User() {
-	}
+	public User(String username, String email, String password, String firstName, Role role) {}
 
-	public User(String username, String email, String password, String name, Role role) {
+	public User(String username, String email, String password, String firstName,
+				String lastName, String address, Integer streetNumber, String postalCode, String city
+				, String country,Role role) {
 		this.username = username;
 		this.email = email;
 		this.password = password;
-		this.name = name;
+		this.firstName = firstName;
 		this.role = role;
+		this.lastName = lastName;
+		this.address = address;
+		this.streetNumber = streetNumber;
+		this.postalCode = postalCode;
+		this.city = city;
+		this.country = country;
+
 	}
 
 	public Long getId() {
@@ -131,8 +162,15 @@ public class User implements UserDetails {
 		private String username;
 		private String email;
 		private String password;
-		private String name;
 		private Role role;
+		private String firstName;
+		private String lastName;
+		private String address;
+		private Integer streetNumber;
+		private String postalCode;
+		private String city;
+		private String country;
+
 
 		UserBuilder() {
 		}
@@ -152,10 +190,43 @@ public class User implements UserDetails {
 			return this;
 		}
 
-		public UserBuilder name(String name) {
-			this.name = name;
+		public UserBuilder firstName(String firstName) {
+			this.firstName = firstName;
 			return this;
 		}
+
+		public UserBuilder lastName(String lastName) {
+			this.lastName = lastName;
+			return this;
+		}
+
+		public UserBuilder address (String address)
+		{
+			this.address = address; return this;
+		}
+
+		public UserBuilder streetNumber (Integer streetNumber)
+		{
+			this.streetNumber = streetNumber; return this;
+		}
+
+		public UserBuilder postalCode (String postalCode)
+		{
+			this.postalCode = postalCode; return this;
+		}
+
+		public UserBuilder city (String city)
+		{
+			this.city = city; return this;
+		}
+
+		public UserBuilder country (String country)
+		{
+			this.country = country; return this;
+		}
+
+
+
 
 		public UserBuilder role(Role role) {
 			this.role = role;
@@ -163,13 +234,23 @@ public class User implements UserDetails {
 		}
 
 		public User build() {
-			return new User(username, email, password, name, role);
+			return new User(username, email, password, firstName,lastName,
+					address, streetNumber, postalCode, city, country, role);
 		}
 
 		@Override
 		public String toString() {
-			return "User.UserBuilder(username=" + this.username + ", email=" + this.email + ", password="
-					+ this.password + ", name=" + this.name + ", role=" + this.role + ")";
+			return "User.UserBuilder(username=" + this.username +
+					", email=" + this.email +
+					", password=" + this.password +
+					", firstName=" + this.firstName +
+					", lastName=" + this.lastName +
+					", address=" + this.address +
+					", streetNumber=" + this.streetNumber +
+					", postalCode=" + this.postalCode +
+					", city=" + this.city +
+					", country=" + this.country +
+					", role=" + this.role + ")";
 		}
 	}
 
