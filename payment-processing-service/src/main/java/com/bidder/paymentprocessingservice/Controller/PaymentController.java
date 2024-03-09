@@ -31,7 +31,6 @@ public class PaymentController {
                     @ApiResponse(responseCode = "400", description = "Bad Request"),
                     @ApiResponse(responseCode = "404", description = "Not found")
             })
-
     @GetMapping
     public ResponseEntity<List<Payment>> getAllPayments() {
         try {
